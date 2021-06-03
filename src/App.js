@@ -1,4 +1,5 @@
 import { Component } from "react";
+import axios from "axios"
 
 
 class App extends Component {
@@ -15,22 +16,23 @@ class App extends Component {
   componentDidMount(){
     
       axios.get("https://api.github.com/repositories")
-        .then( ({ data }) => {
-        this.setState = ({ data })
+        .then( ( { data }) => {
+        this.setState({ data })
       })
 
   }
 
-
   render(){
-    var { data } = this.state
+    const { data } = this.state
+    console.log({data})
   return (
     <div className="App">
+    
       <ul>
-
-          {data.map(nome => {
-            <li>{nome.full_name}</li>
-          })}
+          Olá
+          {data.map(item => 
+            <li key={item.id}>{item.full_name}</li>
+          )}
 
       </ul>
     </div>
