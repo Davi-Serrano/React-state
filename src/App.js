@@ -1,5 +1,6 @@
 import { Component } from "react";
-import axios from "axios"
+import { listRepositorires } from "./API/github"
+import Item from "./componentes/item"
 
 
 class App extends Component {
@@ -14,12 +15,10 @@ class App extends Component {
   }
 
   componentDidMount(){
-    
-      axios.get("https://api.github.com/repositories")
-        .then( ( { data }) => {
-        this.setState({ data })
-      })
-
+    listRepositorires().then( data =>{
+           this.setState({ data })
+         
+          })
   }
 
   render(){
@@ -30,9 +29,8 @@ class App extends Component {
     
       <ul>
           Olá
-          {data.map(item => 
-            <li key={item.id}>{item.full_name}</li>
-          )}
+          {data.map(item => <Item key={item.id} {...item} />)}
+          
 
       </ul>
     </div>
